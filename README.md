@@ -1,2 +1,2 @@
-A Secure Flask Pipeline
+A Secure Flask Pipeline. 
 Tools : Docker, GitHub Actions, Bandit
