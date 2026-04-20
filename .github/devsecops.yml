@@ -1,4 +1,4 @@
-name: DevSecOps Pipeline
+name: DevSecOps-Pipeline
 
 on: [push]
 
@@ -7,22 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          
-      - name: Run Security Scan (Bandit)
-        run: |
-          pip install bandit
-          bandit -r .
-          
-  build-docker:
+      - name: Install Bandit
+        run: pip install bandit
+      - name: Run Security Scan
+        run: bandit -r .
+
+  docker-build:
     needs: security-scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Build Docker Image
-        run: docker build -t secure-app .
+      - name: Build Docker
+        run: docker build -t my-app .
